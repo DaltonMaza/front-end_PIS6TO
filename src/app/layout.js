@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.css'
-import "./globals.css";
+// import "./globals.css";
 import Chatbot from "./components/chat-bot";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,12 +19,13 @@ export default function RootLayout({ children }) {
         <title>App prueba</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
       </head>
+
       <body className={inter.className}>
-      <header style={{ position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1030 }}>
-      <nav className="navbar navbar-expand-lg" style={{
+        <header style={{ position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1030 }}>
+          <nav className="navbar navbar-expand-lg" style={{
             backgroundColor: '#85c1e9', // Fondo color verde agua
             color: "blue", // Color del texto en azul
-        }}>
+            }}>
             <div className="container-fluid">
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -37,10 +38,11 @@ export default function RootLayout({ children }) {
                     </ul>
                 </div>
             </div>
-        </nav>
-          </header>
+          </nav>
+        </header>
         {children}
-        </body>
+        <Chatbot></Chatbot>
+      </body>
     </html>
   );
 }
