@@ -1,6 +1,9 @@
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import 'bootstrap/dist/css/bootstrap.css'
+import Image from 'next/image'
+import 'bootstrap/dist/css/bootstrap.css';
+// import "./globals.css";
+import Chatbot from "./components/chat-bot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,28 +20,42 @@ export default function RootLayout({ children }) {
         <title>App prueba</title>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" />
       </head>
+
       <body className={inter.className}>
-      <header style={{ position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1030 }}>
-      <nav className="navbar navbar-expand-lg" style={{
-            backgroundColor: '#85c1e9', // Fondo color verde agua
-            color: "blue", // Color del texto en azul
-        }}>
-            <div className="container-fluid">
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link href="/" className="nav-link active" aria-current="page">Inicio</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/inicio_sesion" className="nav-link active" aria-current="page">Iniciar Sesión</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-          </header>
+        <header style={{ position: 'fixed', top: 0, right: 0, left: 0, zIndex: 1030 }}>
+        <nav className="navbar navbar-expand-lg" style={{
+      backgroundColor: '#005187', // Fondo color verde agua
+      color: "blue", // Color del texto en azul
+    }}>
+      <div className="container-fluid">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link href="/principal" className="nav-link active" aria-current="page">Inicio</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/login" className="nav-link active" aria-current="page">Iniciar Sesión</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/crear_usuario" className="nav-link active" aria-current="page">Usuarios</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/sensor/create" className="nav-link active" aria-current="page">Sensores</Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/mota/create" className="nav-link active" aria-current="page">Placas</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Agregar la imagen a la derecha del navbar */}
+        <Image src="/logo.png" alt="Logo" width={150} height={50} />
+      </div>
+    </nav>
+        </header>
         {children}
-        </body>
+        <Chatbot></Chatbot>
+      </body>
     </html>
   );
 }
