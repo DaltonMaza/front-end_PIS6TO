@@ -35,6 +35,9 @@ export default function RootLayout({ children }) {
                         <li className="nav-item">
                             <Link href="/inicio_sesion" className="nav-link active" aria-current="page">Iniciar Sesión</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link href="/perfil" className="nav-link active" aria-current="page">Mi perfil</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
