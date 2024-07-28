@@ -139,13 +139,12 @@ export default function Session() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/data');
+        const response = await axios.get('http://localhost:3001/data');
         const data = response.data.allData;
-
         const labels = data.map(d => new Date(d.timestamp).toLocaleDateString());
-        const temperatureData = data.map(d => d.temperature);
-        const humidityData = data.map(d => d.humidity);
-        const co2Data = data.map(d => d.CO2);
+        const temperatureData = data.map(d => d.temperatura);
+        const humidityData = data.map(d => d.humedad);
+        const co2Data = data.map(d => d.co2);
 
         setChartData({
           labels,
@@ -174,9 +173,9 @@ export default function Session() {
         if (data.length > 0) {
           const latestData = data[data.length - 1];
           setWeatherData({
-            temperature: latestData.temperature,
-            humidity: latestData.humidity,
-            co2: latestData.CO2,
+            temperature: latestData.temperatura,
+            humidity: latestData.humedad,
+            co2: latestData.co2,
             date: new Date(latestData.timestamp).toLocaleDateString(),
           });
         }
@@ -186,6 +185,9 @@ export default function Session() {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000); // Actualiza cada 5 segundos
+
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
 
   const { temperature, humidity, co2, date } = weatherData;
