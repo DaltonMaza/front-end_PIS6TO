@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 export default function NavBar() {
-  const { token, logoutUser } = useAuth();
+  const { role, token, logoutUser } = useAuth();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -24,26 +24,13 @@ export default function NavBar() {
               Inicio
             </Link>
           </li>
-          <li>
-            <Link href={"/placas"}>
-              Placas
-            </Link>
-          </li>
-          {/* <li>
-            <Link href={"/sensor"}>
-              Sensores
-            </Link>
-          </li>
-          <li>
-            <Link href={"/history"}>
-              Historial
-            </Link>
-          </li>
-          <li>
-            <Link href={"/pronosticos"}>
-              Pronóstico
-            </Link>
-          </li> */}
+          {role === 'Administrador' &&
+            <li>
+              <Link href={"/placas"}>
+                Placas
+              </Link>
+            </li>
+          }
           {token &&
             <li>
               <Link href={"/perfil"}>
@@ -51,7 +38,7 @@ export default function NavBar() {
               </Link>
             </li>
           }
-          {token &&
+          {role === 'Administrador' &&
             <li>
               <Link href={"/crear_usuario"}>
                 Nuevo usuario
