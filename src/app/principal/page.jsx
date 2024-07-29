@@ -206,21 +206,50 @@ export default function Session() {
         type: 'linear',
         display: true,
         position: 'left',
+        ticks: {
+          color: 'rgba(255, 99, 132, 1)'
+        },
+        grid: {
+          color: 'rgba(255, 99, 132, 0.2)'
+        }
       },
       humidity: {
         type: 'linear',
         display: true,
-        position: 'right',
+        position: 'left',
+        ticks: {
+          color: 'rgba(54, 162, 235, 1)'
+        },
+        grid: {
+          drawOnChartArea: false,
+          color: 'rgba(54, 162, 235, 0.2)'
+        },
+        stack: 'humidity',
+        axis: 'y'
       },
       co2: {
         type: 'linear',
         display: true,
-        position: 'right',
+        position: 'left',
+        ticks: {
+          color: 'rgba(255, 206, 86, 1)'
+        },
         grid: {
           drawOnChartArea: false,
+          color: 'rgba(255, 206, 86, 0.2)'
         },
+        stack: 'co2',
+        axis: 'y'
       },
     },
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: '#000'
+        }
+      }
+    }
   };
 
   const handleDownloadExcel = () => {
