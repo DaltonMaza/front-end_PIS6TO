@@ -24,16 +24,11 @@ export default function NavBar() {
               Inicio
             </Link>
           </li>
-          {/* <li>
-            <Link href={"/user"}>
-              Usuarios
+          <li>
+            <Link href={"/placas"}>
+              Placas
             </Link>
-          </li> */}
-          {/* <li>
-            <Link href={"/mota"}>
-              Motas
-            </Link>
-          </li> */}
+          </li>
           {/* <li>
             <Link href={"/sensor"}>
               Sensores
@@ -49,6 +44,20 @@ export default function NavBar() {
               Pronóstico
             </Link>
           </li> */}
+          {token &&
+            <li>
+              <Link href={"/perfil"}>
+                Perfil
+              </Link>
+            </li>
+          }
+          {token &&
+            <li>
+              <Link href={"/crear_usuario"}>
+                Nuevo usuario
+              </Link>
+            </li>
+          }
         </ul>
       </div>
       {token ? (
