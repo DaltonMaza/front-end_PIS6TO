@@ -41,21 +41,21 @@ const Title = styled.h1`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 80%;
-  max-width: 1200px;
 `;
 
 const DataSection = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  margin-bottom: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 20px;
+  margin-left: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   padding: 20px;
@@ -63,10 +63,9 @@ const DataSection = styled.div`
 `;
 
 const DataBox = styled.div`
-  flex: 1;
   text-align: center;
   padding: 10px;
-  margin: 0 10px;
+  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -85,7 +84,7 @@ const DataText = styled.p`
 `;
 
 const ChartContainer = styled.div`
-  width: 100%;
+  flex: 1;
   margin-top: 20px;
 `;
 
