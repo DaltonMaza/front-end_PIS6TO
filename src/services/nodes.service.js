@@ -1,8 +1,8 @@
 import axios from "axios";
-// const { API_BASEURL } = require("@/constants");
+const { API_URL } = require("@/constants/index");
 
 export const createNode = async (body, token) => {
-  const url = `${API_BASEURL}/nodes`;
+  const url = `${API_URL}/nodes`;
 
   const { data } = await axios.post(url, body, {
     headers: { Authorization: `Bearer ${token}` },
@@ -12,7 +12,7 @@ export const createNode = async (body, token) => {
 };
 
 export const updateNode = async (id, body, token) => {
-  const url = `${API_BASEURL}/nodes/${id}`;
+  const url = `${API_URL}/nodes/${id}`;
 
   const { data } = await axios.put(url, body, {
     headers: { Authorization: `Bearer ${token}` },
@@ -22,7 +22,7 @@ export const updateNode = async (id, body, token) => {
 };
 
 export const deleteNode = async (id, token) => {
-  const url = `${API_BASEURL}/nodes/${id}`;
+  const url = `${API_URL}/nodes/${id}`;
 
   const { data } = await axios.delete(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -32,7 +32,7 @@ export const deleteNode = async (id, token) => {
 };
 
 export const getAllNodes = async (token, owner) => {
-  const url = `${API_BASEURL}/nodes`;
+  const url = `${API_URL}/nodes`;
 
   const { data } = await axios.get(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -42,7 +42,7 @@ export const getAllNodes = async (token, owner) => {
 };
 
 export const getNodeById = async (id, token) => {
-  const url = `${API_BASEURL}/nodes/${id}`;
+  const url = `${API_URL}/nodes/${id}`;
 
   const { data } = await axios.get(url, {
     headers: { Authorization: `Bearer ${token}` },
