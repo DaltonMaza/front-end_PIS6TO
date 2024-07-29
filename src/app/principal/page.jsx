@@ -75,13 +75,13 @@ const DataBox = styled.div`
 const DataTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  color: #333;
+  color: ${props => props.color || '#333'};
   margin-bottom: 10px;
 `;
 
 const DataText = styled.p`
   font-size: 24px;
-  color: #555;
+  color: ${props => props.color || '#555'};
 `;
 
 const ChartContainer = styled.div`
@@ -200,6 +200,19 @@ export default function Session() {
 
   const { temperature, humidity, co2, status } = weatherData;
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'BUENO':
+        return '#32CD32';
+      case 'REGULAR':
+        return '#FFD700';
+      case 'PELIGROSO':
+        return 'red';
+      default:
+        return '#555';
+    }
+  };
+
   const options = {
     scales: {
       temperature: {
@@ -271,8 +284,8 @@ export default function Session() {
       <Content>
         <DataSection>
           <DataBox>
-            <DataTitle>Estado</DataTitle>
-            <DataText>{status}</DataText>
+            <DataTitle color={getStatusColor(status)}>Estado</DataTitle>
+            <DataText color={getStatusColor(status)}>{status}</DataText>
           </DataBox>
           <DataBox>
             <DataTitle>Temperatura</DataTitle>
