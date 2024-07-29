@@ -1,5 +1,5 @@
-let URL = "http://localhost:3001/api/";
-let URLS = "http://localhost:3001/";
+//let URL = "http://localhost:3001/api/";
+let URL = "http://localhost:3001/";
 
 //devolver la url
 export function url_api() {
