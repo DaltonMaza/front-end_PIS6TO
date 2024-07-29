@@ -374,25 +374,17 @@ a {
 }
 
 /* .navbar {
-  width: 200px;
-  height: 87vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: white;
-} */
-.navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 210px;
-  height: 100vh; /* Cambiado a 100vh para que ocupe toda la altura de la pantalla */
+  height: 100vh; Cambiado a 100vh para que ocupe toda la altura de la pantalla
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-  overflow-y: auto; /* Permitir scroll vertical si es necesario */
-  z-index: 1000; /* Asegura que el navbar esté en la parte superior */
+  overflow-y: auto;  Permitir scroll vertical si es necesario 
+  z-index: 1000;  Asegura que el navbar esté en la parte superior 
 }
 
 .navbar ul {
@@ -420,11 +412,62 @@ a {
   text-align: center;
   font-size: 0.9rem;
   color: var(--primary-color);
+} */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Ajusta la altura según tus necesidades */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0 1rem; /* Añade un poco de padding horizontal */
+  z-index: 1000; /* Asegura que el navbar esté en la parte superior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra para un mejor contraste */
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex; /* Muestra los elementos en una fila */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+}
+
+.navbar ul li {
+  padding: 0 1rem; /* Añade un padding horizontal */
+  font-size: 0.95rem;
+}
+
+.navbar div h3 {
+  margin: 0; /* Elimina el margen predeterminado */
+  font-size: 1rem;
+  color: var(--primary-color-text);
+}
+
+.navbar ul li a {
+  color: var(--primary-color-text);
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+.navbar button {
+  background-color: white;
+  border: none;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  cursor: pointer; /* Añade un cursor de puntero */
+}
+
+.navbar button:hover {
+  text-decoration: underline; /* Añade un subrayado al pasar el mouse */
 }
 
 .app-container {
-  display: flex;
+  /* display: flex; */
   height: 100%;
+  width: 100%;
 }
 
 .text-primary {

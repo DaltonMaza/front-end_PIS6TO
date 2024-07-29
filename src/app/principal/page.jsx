@@ -6,6 +6,7 @@ import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { useAuth } from '@/context/AuthContext';
 
 Chart.register(...registerables);
 
@@ -105,6 +106,7 @@ const Button = styled.button`
 `;
 
 export default function Session() {
+  const { token } = useAuth();
   const [weatherData, setWeatherData] = useState({
     temperature: 0,
     humidity: 0,
@@ -258,7 +260,9 @@ export default function Session() {
         </DataSection>
         <ChartContainer>
           <Line data={chartData} options={options} />
-          <Button onClick={handleDownloadExcel}>Descargar Datos Excel</Button>
+          {token &&
+            <Button onClick={handleDownloadExcel}>Descargar Datos Excel</Button>
+          }
         </ChartContainer>
       </Content>
     </Container>
