@@ -109,7 +109,8 @@ export default function Session() {
     temperature: 0,
     humidity: 0,
     co2: 0,
-    date: new Date().toLocaleDateString(),
+    // date: new Date().toLocaleDateString(),
+    status: 'Desconocido'
   });
 
   const [chartData, setChartData] = useState({
@@ -139,12 +140,14 @@ export default function Session() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/data');
+        const response = await axios.get('http://localhost:3001/data/all');
         const data = response.data.allData;
-        const labels = data.map(d => new Date(d.timestamp).toLocaleDateString());
-        const temperatureData = data.map(d => d.temperatura);
-        const humidityData = data.map(d => d.humedad);
-        const co2Data = data.map(d => d.co2);
+        const responseP = await axios.get('http://localhost:3001/data');
+        const dataP = responseP.data.allData;
+        const labels = dataP.map(d => new Date(d.timestamp).toLocaleDateString());
+        const temperatureData = dataP.map(d => d.temperatura);
+        const humidityData = dataP.map(d => d.humedad);
+        const co2Data = dataP.map(d => d.co2);
 
         setChartData({
           labels,
@@ -172,11 +175,14 @@ export default function Session() {
 
         if (data.length > 0) {
           const latestData = data[data.length - 1];
+          const weatherStatusResponse = await axios.get('http://localhost:3001/weatherState');
+          const weatherStatus = weatherStatusResponse.data.response[weatherStatusResponse.data.response.length - 1].state;
           setWeatherData({
             temperature: latestData.temperatura,
             humidity: latestData.humedad,
             co2: latestData.co2,
-            date: new Date(latestData.timestamp).toLocaleDateString(),
+            // date: new Date(latestData.timestamp).toLocaleDateString(),
+            status: weatherStatus
           });
         }
       } catch (error) {
@@ -190,7 +196,7 @@ export default function Session() {
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
 
-  const { temperature, humidity, co2, date } = weatherData;
+  const { temperature, humidity, co2, status } = weatherData;
 
   const options = {
     scales: {
@@ -234,8 +240,8 @@ export default function Session() {
       <Content>
         <DataSection>
           <DataBox>
-            <DataTitle>Fecha</DataTitle>
-            <DataText>{date}</DataText>
+            <DataTitle>Estado</DataTitle>
+            <DataText>{status}</DataText>
           </DataBox>
           <DataBox>
             <DataTitle>Temperatura</DataTitle>
