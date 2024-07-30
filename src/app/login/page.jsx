@@ -43,11 +43,11 @@ export default function Login() {
 
   useEffect(() => {
     if (!user) {
-      const userData = window.localStorage.getItem("user")
+      const roleData = window.localStorage.getItem("rol")
       const token = window.localStorage.getItem("token")
 
-      if (userData && token) {
-        loginUser(JSON.parse(userData), token)
+      if (roleData && token) {
+        loginUser(token)
 
         router.push("/principal")
       }
@@ -89,11 +89,11 @@ export default function Login() {
           type="submit"
           value="Iniciar sesión"
         />
-        {/* <div>
-          <Link className="link-primary" href={"contra"}>
+        <div>
+          <Link className="link-primary" href={"recuperar_cont"}>
             ¿Has olvidado tu contraseña?
           </Link>
-        </div> */}
+        </div>
       </form>
     </div>
   );
