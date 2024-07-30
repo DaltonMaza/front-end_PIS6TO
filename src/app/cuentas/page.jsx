@@ -1,4 +1,3 @@
-// pages/user-management.jsx
 'use client';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -6,9 +5,12 @@ import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { obtenerR, url_api } from '../hooks/Conexion'; // Asegúrate de que la ruta a api-utils sea correcta
+import mongoose from 'mongoose'; 
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
+  const [roles, setRoles] = useState([]); // Estado para los roles, inicializado como un arreglo vacío
   const [selectedUser, setSelectedUser] = useState(null);
   const router = useRouter();
 
@@ -29,22 +31,41 @@ export default function UserManagement() {
 
   useEffect(() => {
     fetchUsers();
+    fetchRoles();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:3000/account/');
+      const response = await axios.get(`${url_api()}account/`);
       setUsers(response.data.allAccounts);
     } catch (error) {
       console.error('Error al obtener los usuarios', error);
     }
   };
 
+  const fetchRoles = async () => {
+    try {
+      const response = await obtenerR('role'); // Ajusta la ruta según sea necesario
+      console.log(response);
+      setRoles(response.results);
+    } catch (error) {
+      console.error('Error al obtener los roles', error);
+      setRoles([]); // En caso de error, asegúrate de que roles sea un arreglo vacío
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
       if (selectedUser) {
+        console.log(selectedUser.id);
         data.id = selectedUser.id;
-        await axios.put(`http://127.0.0.1:3000/account/${selectedUser.id}`, data);
+        data.role = selectedUser.role;
+        // Verificar si el campo role es un ObjectId válido, de lo contrario convertirlo
+        if (!mongoose.Types.ObjectId.isValid(data.role)) {
+          data.role = new mongoose.Types.ObjectId(data.role);
+        }
+        fetchUsers();
+        await axios.put(`${url_api()}account/${localStorage.getItem('external')}`, data);
       }
       fetchUsers();
       setSelectedUser(null);
@@ -56,6 +77,8 @@ export default function UserManagement() {
 
   const handleEdit = (user) => {
     setSelectedUser(user);
+    console.log(user.id);
+    localStorage.setItem('external',user.id);
     setValue('id', user.id);
     setValue('name', user.name);
     setValue('lastname', user.lastname);
@@ -66,7 +89,7 @@ export default function UserManagement() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:3000/account/${id}`);
+      await axios.delete(`${url_api()}account/${id}`);
       fetchUsers();
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
@@ -121,11 +144,17 @@ export default function UserManagement() {
         </div>
         <div>
           <label>Rol</label>
-          <input
+          <select
             {...register('role')}
-            type="text"
             className={`form-control ${errors.role ? 'is-invalid' : ''}`}
-          />
+          >
+            <option value="">Seleccionar...</option>
+            {Array.isArray(roles) && roles.map((role) => (
+              <option key={role.id} value={role.id}>
+                {role.name}
+              </option>
+            ))}
+          </select>
           <div className="invalid-feedback">{errors.role?.message}</div>
         </div>
         <div>
