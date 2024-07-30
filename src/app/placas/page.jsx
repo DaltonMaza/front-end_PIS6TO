@@ -1,5 +1,6 @@
 'use client';
 
+import { API_URL } from '@/constants';
 import React, { useState, useEffect } from 'react';
 
 const Placas = () => {
@@ -12,7 +13,7 @@ const Placas = () => {
   useEffect(() => {
     const fetchPlacas = async () => {
       try {
-        const response = await fetch('http://localhost:3000/Placa');
+        const response = await fetch(`${API_URL}/Placa`);
         if (response.ok) {
           const data = await response.json();
           setPlacas(data);
@@ -42,7 +43,7 @@ const Placas = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/Placa', {
+      const response = await fetch(`${API_URL}/Placa`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
