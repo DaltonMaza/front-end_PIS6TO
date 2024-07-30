@@ -7,7 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { obtenerR, url_api } from '../hooks/Conexion'; // Asegúrate de que la ruta a api-utils sea correcta
 import mongoose from 'mongoose'; 
-
+import mensajes from "../components/Mensajes";
+import mensajeConfirmacion from "../components/MensajeConfirmacion"
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
   const [roles, setRoles] = useState([]); // Estado para los roles, inicializado como un arreglo vacío
@@ -66,12 +67,14 @@ export default function UserManagement() {
         }
         fetchUsers();
         await axios.put(`${url_api()}account/${localStorage.getItem('external')}`, data);
+        mensajes("Usuario modificado exitosamente","usuario modificado","success");
       }
       fetchUsers();
       setSelectedUser(null);
       resetForm();
     } catch (error) {
       console.error('Error al guardar el usuario', error);
+      mensajes("Error al guardar el usuario","usuario no modificado","error");
     }
   };
 
@@ -93,6 +96,7 @@ export default function UserManagement() {
       fetchUsers();
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
+      mensajes(error.body,"usuario no eliminado","error");
     }
   };
 
