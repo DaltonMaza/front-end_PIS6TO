@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
+import { API_URL } from '@/constants';
 
 const fadeIn = keyframes`
   from {
@@ -123,7 +124,7 @@ export default function Perfil() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/account/fb042e31-a8de-4b5c-89cd-cc46b0ceb0a8');
+        const response = await axios.get(`${API_URL}/account/fb042e31-a8de-4b5c-89cd-cc46b0ceb0a8`);
         const data = response.data;
         setProfileData({
           name: data.name,
@@ -149,7 +150,7 @@ export default function Perfil() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/account/fb042e31-a8de-4b5c-89cd-cc46b0ceb0a8`, profileData);
+      await axios.put(`${API_URL}/account/fb042e31-a8de-4b5c-89cd-cc46b0ceb0a8`, profileData);
       alert('Profile updated successfully!');
       setEditMode(false);
     } catch (error) {
