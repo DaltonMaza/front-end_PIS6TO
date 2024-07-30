@@ -52,23 +52,14 @@ export default function Page() {
         height: '100vh', // Asegura que el contenedor ocupe el 100% de la altura de la pantalla
       }}
     >
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column center-elements">
         <h1 style={{ color: '#205375', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           Exportar Datos
         </h1>
-        <div
-          className="container-fluid"
-          style={{
-            border: '4px solid #ccc',
-            padding: '20px',
-            borderRadius: '10px',
-            width: '1000px',
-            background: 'white', // Asegura que el fondo sea blanco para mejorar la legibilidad
-          }}
-        >
+        <div className="container-fluid form-container">
           <br />
-          <form onSubmit={handleSubmit(onSubmit)} className="mota">
-            <div className="row mb-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="center-elements">
+            <div className="row mb-4 center-elements">
               <div className="col">
                 <input
                   {...register('startDate')}
