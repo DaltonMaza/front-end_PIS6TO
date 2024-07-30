@@ -12,7 +12,7 @@ const Placas = () => {
   useEffect(() => {
     const fetchPlacas = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/Placa');
+        const response = await fetch('http://localhost:3000/Placa');
         if (response.ok) {
           const data = await response.json();
           setPlacas(data);
@@ -42,7 +42,7 @@ const Placas = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/Placa', {
+      const response = await fetch('http://localhost:3000/Placa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
