@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
+import { API_URL } from '@/constants';
 
 export default function Page() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function Page() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        'http://127.0.0.1:3000/data/export',
+        `${API_URL}/data/export`,
         {
           startDate: new Date(data.startDate).toISOString(),
           endDate: new Date(data.endDate).toISOString()

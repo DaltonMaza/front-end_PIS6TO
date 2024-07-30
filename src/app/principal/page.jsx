@@ -7,6 +7,7 @@ import styled, { keyframes } from 'styled-components';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { useAuth } from '@/context/AuthContext';
+import { API_URL } from '@/constants';
 
 Chart.register(...registerables);
 
@@ -141,9 +142,9 @@ export default function Session() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/data/all');
+        const response = await axios.get(`${API_URL}/data/all`);
         const data = response.data.allData;
-        const responseP = await axios.get('http://localhost:3000/data');
+        const responseP = await axios.get(`${API_URL}/data`);
         const dataP = responseP.data.allData;
         const labels = dataP.map(d => new Date(d.timestamp).toLocaleDateString());
         const temperatureData = dataP.map(d => d.temperatura);
@@ -176,7 +177,7 @@ export default function Session() {
 
         if (data.length > 0) {
           const latestData = data[data.length - 1];
-          const weatherStatusResponse = await axios.get('http://localhost:3000/weatherState');
+          const weatherStatusResponse = await axios.get(`${API_URL}/weatherState`);
           const weatherStatus = weatherStatusResponse.data.response[weatherStatusResponse.data.response.length - 1].state;
           setWeatherData({
             temperature: latestData.temperatura,

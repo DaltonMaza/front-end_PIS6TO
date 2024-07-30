@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import { API_URL } from '@/constants';
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
@@ -33,7 +34,7 @@ export default function UserManagement() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:3000/account/');
+      const response = await axios.get(`${API_URL}/account`);
       setUsers(response.data.allAccounts);
     } catch (error) {
       console.error('Error al obtener los usuarios', error);
@@ -44,7 +45,7 @@ export default function UserManagement() {
     try {
       if (selectedUser) {
         data.id = selectedUser.id;
-        await axios.put(`http://127.0.0.1:3000/account/${selectedUser.id}`, data);
+        await axios.put(`${API_URL}/account/${selectedUser.id}`, data);
       }
       fetchUsers();
       setSelectedUser(null);
@@ -66,7 +67,7 @@ export default function UserManagement() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:3000/account/${id}`);
+      await axios.delete(`${API_URL}/account/${id}`);
       fetchUsers();
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
