@@ -1,4 +1,4 @@
-//let URL = "http://localhost:3000/api/";
+//let URL = "http://localhost:3001/api/";
 let URL = "http://localhost:3000/";
 
 //devolver la url
@@ -124,6 +124,37 @@ export async function enviarLibro(recurso, imagen, data, key = "", rol) {
 
   return await response.json();
 }
+export async function descargarArchivo(recurso, key = "") {
+  let headers = {};
+
+  if (key !== "") {
+      headers = {
+          "TOKEN-API": key,
+      };
+  }
+
+  const response = await fetch(URL + recurso, {
+      method: "GET",
+      headers: headers,
+  });
+
+  if (!response.ok) {
+      throw new Error("Network response was not ok");
+  }
+
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+
+  a.download = "export";
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
+}
+
 export const enviarVenta = async (recurso, data, array, key = "") => {
   const formData = new FormData();
   array.forEach((element) => {

@@ -45,6 +45,20 @@ export default function NavBar() {
               </Link>
             </li>
           }
+          {role === 'Administrador' &&
+            <li>
+              <Link href={"/exportar"}>
+                Exportar
+              </Link>
+            </li>
+          }
+          {role === 'Administrador' &&
+            <li>
+              <Link href={"/cuentas"}>
+                Gestionar Cuentas
+              </Link>
+            </li>
+          }
         </ul>
       </div>
       {token ? (
