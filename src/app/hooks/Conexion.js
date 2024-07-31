@@ -1,6 +1,6 @@
 //let URL = "http://localhost:3001/api/";
 //let URL = "http://localhost:3000/";
-let URL = "backend.greencoast-d0c064cb.centralus.azurecontainerapps.io"
+let URL = "backend.greencoast-d0c064cb.centralus.azurecontainerapps.io/"
 //devolver la url
 export function url_api() {
   return URL;
