@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { obtenerR, url_api } from '../hooks/Conexion'; // Asegúrate de que la ruta a api-utils sea correcta
+import { obtenerR } from '../hooks/Conexion'; // Asegúrate de que la ruta a api-utils sea correcta
 import mongoose from 'mongoose'; 
 import mensajes from "../components/Mensajes";
 import mensajeConfirmacion from "../components/MensajeConfirmacion"
+import { API_URL } from '@/constants';
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
   const [roles, setRoles] = useState([]); // Estado para los roles, inicializado como un arreglo vacío
@@ -37,7 +38,7 @@ export default function UserManagement() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${url_api()}account/`);
+      const response = await axios.get(`${API_URL}/account`);
       setUsers(response.data.allAccounts);
     } catch (error) {
       console.error('Error al obtener los usuarios', error);
@@ -66,7 +67,7 @@ export default function UserManagement() {
           data.role = new mongoose.Types.ObjectId(data.role);
         }
         fetchUsers();
-        await axios.put(`${url_api()}account/${localStorage.getItem('external')}`, data);
+        await axios.put(`${API_URL}/account/${localStorage.getItem('external')}`, data);
         mensajes("Usuario modificado exitosamente","usuario modificado","success");
       }
       fetchUsers();
@@ -92,7 +93,7 @@ export default function UserManagement() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${url_api()}account/${id}`);
+      await axios.delete(`${API_URL}/account/${id}`);
       fetchUsers();
     } catch (error) {
       console.error('Error al eliminar el usuario', error);
