@@ -16,7 +16,7 @@ export async function obtenerR(recurso) {
       "Content-Type": "application/json",
   };
 
-  const response = await (await fetch(URL +'/'+ recurso, {
+  const response = await (await fetch(URL + recurso, {
       method: "GET",
       headers: headers,
       cache: 'no-store'
