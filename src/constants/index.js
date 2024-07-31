@@ -1,1 +1,1 @@
-export const API_URL = process.env.NEXT_PUBLIC_URL_API;
+export const API_URL = backend.greencoast-d0c064cb.centralus.azurecontainerapps.io;
