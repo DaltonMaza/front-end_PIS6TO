@@ -1,1 +1,1 @@
-export const API_URL = backend.greencoast-d0c064cb.centralus.azurecontainerapps.io;
+export const API_URL = "backend.greencoast-d0c064cb.centralus.azurecontainerapps.io";
