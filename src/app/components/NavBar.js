@@ -31,13 +31,13 @@ export default function NavBar() {
               </Link>
             </li>
           }
-          {token &&
+          {/* {token &&
             <li>
               <Link href={"/perfil"}>
                 Perfil
               </Link>
             </li>
-          }
+          } */}
           {role === 'Administrador' &&
             <li>
               <Link href={"/crear_usuario"}>
