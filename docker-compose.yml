@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  app:
+
+    image: frontend-pis-6to:1.3 # Cambia esto por el nombre de tu imagen si ya la has construido
+    build:
+      context: .
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}" # Mapea el puerto del contenedor al puerto definido en el .env
